@@ -1,0 +1,33 @@
+.header-spacer {
+    flex: 1 1 auto;
+}
+
+.sidenav-container {
+    width: 500px;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sidenav {
+    padding: 20px;
+    width: 300px;
+    background: var(--mat-sys-primary-container);
+  }
+
+  mat-drawer {
+    border-top-right-radius: 0;
+  }
+
+  .menu-icon {
+    vertical-align: middle; /* Wyrównanie w pionie */
+    margin-right: 8px;      /* Dodaje odstęp między ikoną a tekstem */
+    display: inline-flex;
+    align-items: center;
+  }

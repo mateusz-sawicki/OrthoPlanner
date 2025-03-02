@@ -1,13 +1,21 @@
 import { Component } from '@angular/core';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
 import { RouterOutlet } from '@angular/router';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { routes } from './app.routes';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatSlideToggleModule],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavModule, MatListModule, RouterOutlet],
+
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'OrthoPlanner';
+  opened: boolean = false;
+  routes = routes;
 }
