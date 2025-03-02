@@ -17,17 +17,56 @@
   
   .sidenav {
     padding: 20px;
-    width: 300px;
-    background: var(--mat-sys-primary-container);
   }
 
-  mat-drawer {
-    border-top-right-radius: 0;
+  .menu-item {
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
+    padding-left: 8px !important;
+    border-radius: 8px !important;
+    border-left: 2px solid transparent;
+    color: inherit;
+    margin-top: 10px;
+  
+    mat-icon {
+      color: inherit;
+      font-size: 44px;
+      width: 48px;
+      height: 48px;
+    }
   }
 
-  .menu-icon {
-    vertical-align: middle; /* Wyrównanie w pionie */
-    margin-right: 8px;      /* Dodaje odstęp między ikoną a tekstem */
-    display: inline-flex;
-    align-items: center;
+  .menu-item:focus {
+    outline: none !important;
   }
+
+  .menu-item span[matListItemTitle] {
+    font-size: 18px !important;
+    font-weight: 300;
+  }
+  
+  // Styl dla aktywnego elementu
+  .selected-menu-item {
+    border-left-color: var(--mat-sys-primary); // Pokaż aktywne podświetlenie na lewym pasku
+    background: rgba(0, 0, 0, 0.05) !important; // Usunięcie tła
+    color: var(--mat-sys-primary) !important; // Tekst w kolorze primary
+  
+    mat-icon {
+      color: var(--mat-sys-primary) !important; // Ikona w kolorze primary
+    }
+
+    span[matListItemTitle] {
+      color: var(--mat-sys-primary) !important; // Label w kolorze primary
+    }
+
+    &:focus, &:hover {
+      background: rgba(0, 0, 0, 0.05) !important; // Zapobiega zmianie tła
+      color: var(--mat-sys-primary) !important;
+    }
+  }
+
+  mat-sidenav {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  

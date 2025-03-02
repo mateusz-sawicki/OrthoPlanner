@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <button mat-icon-button class="header-icon" (click)="drawer.toggle()">
+    <button mat-icon-button class="header-icon" (click)="opened.set(!opened())">
         <mat-icon>menu</mat-icon>
     </button>
     <span>My App</span>
@@ -12,20 +12,26 @@
     </button>
 </mat-toolbar>
 
-<mat-drawer-container class="sidenav-container" autosize>
-    <mat-drawer #drawer class="sidenav" mode="side" opened>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav class="sidenav" mode="side" opened [style.width]="sidenavWidth()">
       <mat-nav-list>
-        @for (route of routes; track route) {  
-            <a mat-list-item [href]="route.path" class="center-flex">
-                <mat-icon fontSet="material-symbols-outlined" fontWeight="fill" class="menu-icon">{{route?.data?.['icon']}}</mat-icon>
-                <span mat-line>{{ route.title }}</span>
+        @for (item of menuItems(); track item) {  
+            <a 
+                mat-list-item 
+                [routerLink]="item.route" 
+                routerLinkActive="selected-menu-item"
+                #rla="routerLinkActive"
+                class="menu-item">
+                    <mat-icon matListItemIcon fontSet="material-symbols-outlined" fontWeight="100">{{item.icon}}</mat-icon>
+                    @if(!opened()){
+                        <span matListItemTitle>{{ item.label }}</span>
+                    }
             </a>
         }
       </mat-nav-list>
-    </mat-drawer>
-  
-    <div class="sidenav-content">
+    </mat-sidenav>
+    <mat-sidenav-content class="sidenav-content" [style.margin-left]="sidenavWidth()">
         <router-outlet></router-outlet>
-    </div>
+    </mat-sidenav-content>
   
-</mat-drawer-container>
+</mat-sidenav-container>

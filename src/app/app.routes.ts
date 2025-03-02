@@ -7,43 +7,28 @@ import { TreatmentsPlansComponent } from './feature/treatments-plans/treatments-
 
 export const routes: Routes = [
     {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'dashboard'
+    },
+    {
         path: 'dashboard',
-        component: DashboardComponent,
-        title: 'Dashboard',
-        data: {
-            icon: 'dashboard'
-        }   
+        component: DashboardComponent
     },
     {
         path: 'treatment-plans',
-        component: TreatmentsPlansComponent,
-        title: 'Treatment plans',
-        data: {
-            icon: 'fact_check'
-        }   
+        component: TreatmentsPlansComponent
     },
     {
         path: 'patients',
-        component: PatientsComponent,
-        title: 'Patients',
-        data: {
-            icon: 'patient_list'
-        }   
+        component: PatientsComponent
     },
     {
         path: 'price-lists',
-        component: PriceListsComponent,
-        title: 'Price lists',
-        data: {
-            icon: 'request_quote'
-        }   
+        component: PriceListsComponent
     },
     {
         path: 'procedures',
-        component: ProceduresComponent,
-        title: 'Procedures',
-        data: {
-            icon: 'procedure'
-        }   
+        component: ProceduresComponent  
     },
 ];
