@@ -7,56 +7,23 @@ import {MatListModule} from '@angular/material/list';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
+import { FabBtnComponent } from "./layout/fab-btn/fab-btn.component";
+import { MenuItem } from './layout/sidenav/menu-items';
+import { SidenavComponent } from "./layout/sidenav/sidenav.component";
 
-export type MenuItem = {
-  icon: string,
-  label: string,
-  route: string
-}
 @Component({
   selector: 'app-root',
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavModule, MatListModule, RouterOutlet, RouterModule, CommonModule],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavModule, MatListModule, RouterModule, CommonModule, SidenavComponent],
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'OrthoPlanner';
-  @ViewChild(MatSidenav)
-  sidenav!: MatSidenav;
-  isMobile= true;
   isOpened = true;
-  menuItems = signal<MenuItem[]>([
-    {
-      icon: 'dashboard',
-      label: 'Dashboard',
-      route: 'dashboard'
-    },
-    {
-      icon: 'fact_check',
-      label: 'Treatment plans',
-      route: 'treatment-plans'
-    },
-    {
-      icon: 'patient_list',
-      label: 'Patients',
-      route: 'patients'
-    },
-    {
-      icon: 'request_quote',
-      label: 'Price lists',
-      route: 'price-lists'
-    },
-    {
-      icon: 'procedure',
-      label: 'Procedures',
-      route: 'procedures'
-    },
-  ]);
-  constructor(private router: Router, private observer: BreakpointObserver) {}
-  isActive(route: string): boolean {
-    return this.router.url === route;
-  }
+  isMobile= true;
+  constructor(private observer: BreakpointObserver) {}
+
   ngOnInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
       if(screenSize.matches){
@@ -67,13 +34,7 @@ export class AppComponent {
     });
   }
 
-  toggleMenu() {
-    if(this.isMobile){
-      this.sidenav.toggle();
-      this.isOpened = false;
-    } else {
-      this.sidenav.open();
-      this.isOpened = !this.isOpened;
+      toggleMenu() {
+        this.isOpened = !this.isOpened;
     }
-  }
 }

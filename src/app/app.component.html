@@ -12,26 +12,4 @@
         <mat-icon>share</mat-icon>
     </button>
 </mat-toolbar>
-<mat-sidenav-container autosize="true">
-    <mat-sidenav [ngClass]="isOpened ? 'expanded' : ''" [mode]="isMobile ? 'over' : 'side'" [opened]="isMobile ? 'false' : 'true'">
-      <mat-nav-list>
-        @for (item of menuItems(); track item) {  
-            <a 
-                mat-list-item 
-                [routerLink]="item.route" 
-                routerLinkActive="selected-menu-item"
-                #rla="routerLinkActive"
-                class="menu-item">
-                    <mat-icon matListItemIcon fontSet="material-symbols-outlined" fontWeight="100">{{item.icon}}</mat-icon>
-                    @if (isOpened || isMobile)
-                    {
-                        <span matListItemTitle>{{ item.label }}</span>
-                    }
-            </a>
-        }
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+<app-sidenav [isMobile]="isMobile" [isOpened]="isOpened" (toggleSidenav)="toggleMenu()"></app-sidenav>
