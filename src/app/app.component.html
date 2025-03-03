@@ -1,8 +1,9 @@
 <mat-toolbar>
-    <button mat-icon-button class="header-icon" (click)="opened.set(!opened())">
-        <mat-icon>menu</mat-icon>
+    <button mat-icon-button (click)="toggleMenu()">
+        <mat-icon matListItemIcon fontSet="material-symbols-outlined" fontWeight="100">dentistry</mat-icon>
     </button>
-    <span>My App</span>
+    <h1>{{title}}</h1>
+    
     <span class="header-spacer"></span>
     <button mat-icon-button class="header-icon favorite-icon">
         <mat-icon>favorite</mat-icon>
@@ -11,9 +12,8 @@
         <mat-icon>share</mat-icon>
     </button>
 </mat-toolbar>
-
-<mat-sidenav-container class="sidenav-container">
-    <mat-sidenav class="sidenav" mode="side" opened [style.width]="sidenavWidth()">
+<mat-sidenav-container autosize="true">
+    <mat-sidenav [ngClass]="isOpened ? 'expanded' : ''" [mode]="isMobile ? 'over' : 'side'" [opened]="isMobile ? 'false' : 'true'">
       <mat-nav-list>
         @for (item of menuItems(); track item) {  
             <a 
@@ -23,15 +23,15 @@
                 #rla="routerLinkActive"
                 class="menu-item">
                     <mat-icon matListItemIcon fontSet="material-symbols-outlined" fontWeight="100">{{item.icon}}</mat-icon>
-                    @if(!opened()){
+                    @if (isOpened || isMobile)
+                    {
                         <span matListItemTitle>{{ item.label }}</span>
                     }
             </a>
         }
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content class="sidenav-content" [style.margin-left]="sidenavWidth()">
+    <mat-sidenav-content>
         <router-outlet></router-outlet>
     </mat-sidenav-content>
-  
 </mat-sidenav-container>

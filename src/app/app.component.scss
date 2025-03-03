@@ -1,24 +1,6 @@
 .header-spacer {
     flex: 1 1 auto;
 }
-
-.sidenav-container {
-    width: 500px;
-    height: 100%;
-    width: 100%;
-  }
-  
-  .sidenav-content {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .sidenav {
-    padding: 20px;
-  }
-
   .menu-item {
     padding-top: 30px !important;
     padding-bottom: 30px !important;
@@ -45,7 +27,6 @@
     font-weight: 300;
   }
   
-  // Styl dla aktywnego elementu
   .selected-menu-item {
     border-left-color: var(--mat-sys-primary); // Pokaż aktywne podświetlenie na lewym pasku
     background: rgba(0, 0, 0, 0.05) !important; // Usunięcie tła
@@ -70,3 +51,50 @@
     padding-right: 10px !important;
   }
   
+  h1 {
+    padding: 0 1rem;
+}
+
+h2 {padding: 1rem;}
+
+mat-toolbar{
+    position:fixed;
+    top:0;
+    z-index: 2;
+    border-bottom:1px solid var(--mat-sys-secondary-container);
+}
+
+mat-sidenav-container {
+    height:100%;
+}
+
+mat-sidenav {
+    padding-top: 3.5rem;
+    border-right: 1px solid var(--mat-sys-secondary-container);
+    border-bottom-right-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    @media screen and (min-width: 600px) {
+      padding-top: 4rem;
+    width: 100px;
+
+    }
+
+    .entry{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding:0.75rem;
+    }
+
+  }
+
+mat-sidenav-content{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.expanded {
+    width: 300px;   
+}

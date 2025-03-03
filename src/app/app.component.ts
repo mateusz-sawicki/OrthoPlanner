@@ -1,10 +1,12 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, ViewChild } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSidenav, MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { CommonModule } from '@angular/common';
 
 export type MenuItem = {
   icon: string,
@@ -13,15 +15,17 @@ export type MenuItem = {
 }
 @Component({
   selector: 'app-root',
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavModule, MatListModule, RouterOutlet, RouterModule],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavModule, MatListModule, RouterOutlet, RouterModule, CommonModule],
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'OrthoPlanner';
-  opened = signal(false);
-  sidenavWidth = computed(() => this.opened() ? '100px' : '250px')
+  @ViewChild(MatSidenav)
+  sidenav!: MatSidenav;
+  isMobile= true;
+  isOpened = true;
   menuItems = signal<MenuItem[]>([
     {
       icon: 'dashboard',
@@ -49,8 +53,27 @@ export class AppComponent {
       route: 'procedures'
     },
   ]);
-  constructor(private router: Router) {}
+  constructor(private router: Router, private observer: BreakpointObserver) {}
   isActive(route: string): boolean {
     return this.router.url === route;
+  }
+  ngOnInit() {
+    this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
+      if(screenSize.matches){
+        this.isMobile = true;
+      } else {
+        this.isMobile = false;
+      }
+    });
+  }
+
+  toggleMenu() {
+    if(this.isMobile){
+      this.sidenav.toggle();
+      this.isOpened = false;
+    } else {
+      this.sidenav.open();
+      this.isOpened = !this.isOpened;
+    }
   }
 }
